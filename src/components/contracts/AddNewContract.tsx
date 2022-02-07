@@ -10,13 +10,12 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useCallback, useEffect, useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { contractDb } from "../../databases/contracts";
 import useSdk from "../../hooks/useSdk";
 import { AllChains, SupportedChainIdToLabelMap } from "../../utils/network";
 
 export default function AddNewContract() {
-  const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
   const [address, setAddress] = useState<string>(
@@ -39,10 +38,12 @@ export default function AddNewContract() {
   });
 
   useEffect(() => {
-    navigate(
+    window.history.replaceState(
+      null,
+      "Add New Contract",
       `/contracts/new/?address=${address}&label=${label}&chainId=${chainId}`
     );
-  }, [address, label, chainId, navigate]);
+  }, [address, label, chainId]);
 
   const testConnection = useCallback(async () => {
     const module = sdk.getNFTModule(address);
