@@ -1,4 +1,5 @@
 import { useSwitchNetwork, useWeb3 } from "@3rdweb/hooks";
+import { useDropzone } from "react-dropzone";
 import {
   Box,
   Button,
@@ -46,6 +47,17 @@ export default function AddNewQrCode() {
   const { provider, address, chainId, connectWallet } = useWeb3();
   const { switchNetwork } = useSwitchNetwork();
 
+  const [imageFile, setImageFile] = useState<File | undefined>(undefined);
+  const onDrop = useCallback((acceptedFiles) => {
+    console.log(acceptedFiles);
+    setImageFile(acceptedFiles[0]);
+  }, []);
+
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    maxFiles: 1,
+  });
+
   const sdk = useSdk({
     signer: provider?.getSigner(),
     chainId: selectedContract?.chainId,
@@ -85,6 +97,11 @@ export default function AddNewQrCode() {
       },
       name: selectedForm?.name,
     };
+
+    if (imageFile) {
+      (metadata as any)["image"] = imageFile;
+    }
+
     const { payload, signature } = await module.generateSignature({
       metadata,
       price: 0,
@@ -233,14 +250,6 @@ export default function AddNewQrCode() {
         <li key={a}>{a}</li>
       ))}
 
-      {(selectedContract === undefined || selectedForm === undefined) && (
-        <Text mt={2} color={"red.500"}>
-          <blockquote>
-            Select a form and contract in order to generate a QR Code
-          </blockquote>
-        </Text>
-      )}
-
       <FormControl mt={2}>
         <FormLabel alignItems={"center"}>
           Restrict to specific wallet{" "}
@@ -270,6 +279,50 @@ export default function AddNewQrCode() {
           )}
         </HStack>
       </FormControl>
+
+      <FormControl mt={2}>
+        <FormLabel alignItems={"center"}>
+          Custom Image{" "}
+          <Tooltip label="An image that will be included in the minted NFT">
+            <span>
+              <InfoIcon
+                style={{
+                  display: "inline",
+                }}
+              />
+            </span>
+          </Tooltip>
+        </FormLabel>
+
+        <Box
+          {...getRootProps()}
+          borderWidth={"3px"}
+          borderColor={"blue"}
+          p={6}
+          m={6}
+          borderRadius={"10px"}
+          backgroundColor={"blue.100"}
+        >
+          <input {...getInputProps()} />
+          {imageFile !== undefined ? (
+            <Text>
+              {imageFile.name} (drag and drop another file to replace this)
+            </Text>
+          ) : isDragActive ? (
+            <p>Drop the file here ...</p>
+          ) : (
+            <p>Drag 'n' drop an image file here</p>
+          )}
+        </Box>
+      </FormControl>
+
+      {(selectedContract === undefined || selectedForm === undefined) && (
+        <Text mt={2} color={"red.500"}>
+          <blockquote>
+            Select a form and contract in order to generate a QR Code
+          </blockquote>
+        </Text>
+      )}
 
       <Flex flexDir={"row"} mt={2}>
         <Button
