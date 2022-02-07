@@ -43,7 +43,7 @@ export default function ClaimCode() {
 
   return (
     <Flex mt={2} flexDir={"column"}>
-      <Heading size={"lg"}>Claim QR Code</Heading>
+      <Heading size={"lg"}>Claim the '{code.metadata.name}' NFT</Heading>
 
       {isValid ? (
         <Button
