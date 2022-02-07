@@ -16,7 +16,7 @@ export default function ViewCode() {
 
   return (
     <Box>
-      <CodeCard qrCode={qrCode} />
+      <CodeCard qrCode={qrCode} showCopyLinkButton={true} />
     </Box>
   );
 }
