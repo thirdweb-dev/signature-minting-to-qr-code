@@ -79,13 +79,14 @@ export default function AddNewQrCode() {
     }
 
     const mintEndTime = Math.floor(Date.now() / 1000) + 60 * 60 * 24;
-    const { payload, signature } = await module.generateSignature({
-      metadata: {
-        properties: {
-          ...formValues,
-        },
+    const metadata = {
+      properties: {
+        ...formValues,
         name: selectedForm?.name,
       },
+    };
+    const { payload, signature } = await module.generateSignature({
+      metadata,
       price: 0,
       currencyAddress: ethers.constants.AddressZero,
       mintStartTimeEpochSeconds: Math.floor(Date.now() / 1000) - 60,
@@ -96,7 +97,7 @@ export default function AddNewQrCode() {
     });
 
     const code: Code = {
-      metadata: formValues,
+      metadata,
       chainId: selectedContract?.chainId,
       claimEndTimeInSeconds: mintEndTime,
       contractAddress: selectedContract?.address,
@@ -127,6 +128,7 @@ export default function AddNewQrCode() {
     restrictedTo,
     selectedContract?.address,
     selectedContract?.chainId,
+    selectedForm?.name,
     switchNetwork,
     toast,
   ]);
