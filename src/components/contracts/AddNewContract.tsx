@@ -46,10 +46,10 @@ export default function AddNewContract() {
   }, [address, label, chainId]);
 
   const testConnection = useCallback(async () => {
-    const module = sdk.getNFTModule(address);
+    const module = sdk?.getNFTModule(address);
     console.log("testing contract");
     try {
-      await module.readOnlyContract.nextTokenIdToMint();
+      await module?.readOnlyContract.nextTokenIdToMint();
     } catch (err: any) {
       console.error(err);
       toast({

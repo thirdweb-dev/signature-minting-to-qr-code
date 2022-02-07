@@ -10,8 +10,8 @@ const Layout: React.FC = ({ children }) => {
   return (
     <Flex flexDir={"column"} padding={6}>
       <Flex flexDir={"row"} alignItems={"center"}>
-        <Box flexGrow={1} mr={2}>
-          <ConnectWallet></ConnectWallet>
+        <Box flexGrow={1} mr={2} alignSelf={"flex-end"}>
+          {/* <ConnectWallet disableNetworkSwitching={true}></ConnectWallet> */}
         </Box>
       </Flex>
 

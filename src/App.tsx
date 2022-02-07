@@ -5,10 +5,14 @@ import ContractList from "./components/contracts/ContractList";
 import AddNewForm from "./components/forms/AddNewForm";
 import FormList from "./components/forms/FormList";
 import Layout from "./components/Layout";
+import AddNewQrCode from "./components/qrCodes/AddNewQrCode";
+import QrCodeList from "./components/qrCodes/QrCodeList";
+import ViewCode from "./routes/qr-codes/[:id]";
 import ContractsPage from "./routes/contracts";
 import FormsPage from "./routes/forms";
 import HomePage from "./routes/home";
 import QrCodesPages from "./routes/qrCodes";
+import ClaimCode from "./routes/claim";
 
 const App = () => (
   <Router>
@@ -26,8 +30,12 @@ const App = () => (
         </Route>
 
         <Route path="/qr-codes" element={<QrCodesPages />}>
-          <Route path="" element={<FormList />} />
+          <Route path="" element={<QrCodeList />} />
+          <Route path="new" element={<AddNewQrCode />} />
+          <Route path=":id" element={<ViewCode />} />
         </Route>
+
+        <Route path="claim" element={<ClaimCode />} />
 
         <Route
           path="*"

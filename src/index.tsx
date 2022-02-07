@@ -7,6 +7,10 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import theme from "./theme";
 
+(window as any).global = window;
+// @ts-ignore
+window.Buffer = window.Buffer || require("buffer").Buffer;
+
 export const supportedChainIds = [1, 4, 137, 80001];
 const connectors = {
   injected: {},

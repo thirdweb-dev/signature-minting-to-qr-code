@@ -6,9 +6,9 @@ import { SupportedChainId } from "./../utils/network";
 export default function useSdk(options: {
   chainId?: SupportedChainId;
   signer?: Signer;
-}) {
+}): ThirdwebSDK | undefined {
   if (!options.signer && !options.chainId) {
-    throw new Error("useSdk: Either signer or chainId must be provided");
+    return undefined;
   }
 
   if (options.signer) {
@@ -20,5 +20,5 @@ export default function useSdk(options: {
     return new ThirdwebSDK(rpcUrl);
   }
 
-  throw new Error("useSdk: Neither signer nor chainId provided");
+  return undefined;
 }

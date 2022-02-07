@@ -1,4 +1,4 @@
-import { Text, Button, Flex, Heading, Spinner } from "@chakra-ui/react";
+import { Flex, Heading, Spinner, Text } from "@chakra-ui/react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { formDb } from "../../databases/forms";
 
