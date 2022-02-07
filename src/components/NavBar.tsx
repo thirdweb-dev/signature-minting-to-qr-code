@@ -16,6 +16,10 @@ export default function NavBar() {
       <Box mx={2}>
         <Link to="/forms">Forms</Link>
       </Box>
+
+      <Box mx={2}>
+        <Link to="/qr-codes">QR Codes</Link>
+      </Box>
     </Flex>
   );
 }

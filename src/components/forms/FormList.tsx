@@ -1,10 +1,10 @@
-import { Flex, Heading, Spinner } from "@chakra-ui/react";
+import { Text, Button, Flex, Heading, Spinner } from "@chakra-ui/react";
 import { useLiveQuery } from "dexie-react-hooks";
-import { contractDb } from "../../databases/contracts";
+import { formDb } from "../../databases/forms";
 
 export default function FormList() {
   const contracts = useLiveQuery(() =>
-    contractDb.contracts.orderBy("createdAtInSeconds").toArray()
+    formDb.forms.orderBy("createdAtInSeconds").toArray()
   );
 
   if (contracts === undefined) {
@@ -14,8 +14,26 @@ export default function FormList() {
   return (
     <Flex flexDir={"column"}>
       <Heading mt={2} size={"sm"}>
-        All contracts
+        All forms
       </Heading>
+
+      {contracts.map((contract) => (
+        <Flex
+          key={contract.id}
+          borderColor={"white"}
+          flexDir={"column"}
+          borderWidth={"1px"}
+          m={2}
+          p={2}
+          borderRadius={"10px"}
+        >
+          <Flex flexDir={"row"}>
+            <Flex flexDir={"column"} flexGrow={1}>
+              <Text>{contract.name}</Text>
+            </Flex>
+          </Flex>
+        </Flex>
+      ))}
     </Flex>
   );
 }

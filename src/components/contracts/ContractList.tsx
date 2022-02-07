@@ -1,5 +1,7 @@
-import { Flex, Heading, Spinner, Text } from "@chakra-ui/react";
+import { Button, Flex, Heading, Spinner, Text } from "@chakra-ui/react";
 import { useLiveQuery } from "dexie-react-hooks";
+import { FaTrashAlt } from "react-icons/fa";
+import { ImPencil } from "react-icons/im";
 import { contractDb } from "../../databases/contracts";
 import { SupportedChainIdToLabelMap } from "../../utils/network";
 
@@ -28,12 +30,26 @@ export default function ContractList() {
           p={2}
           borderRadius={"10px"}
         >
-          <Text>{contract.label}</Text>
+          <Flex flexDir={"row"}>
+            <Flex flexDir={"column"} flexGrow={1}>
+              <Text>{contract.label}</Text>
 
-          <Text>Address: {contract.address}</Text>
-          <Text>
-            Chain: {SupportedChainIdToLabelMap[contract.chainId as number]}
-          </Text>
+              <Text>Address: {contract.address}</Text>
+              <Text>
+                Chain: {SupportedChainIdToLabelMap[contract.chainId as number]}
+              </Text>
+            </Flex>
+
+            <Flex flexDir={"row"} alignItems={"flex-end"}>
+              <Button variant={"unstyled"}>
+                <ImPencil />
+              </Button>
+
+              <Button variant={"unstyled"} color={"red"}>
+                <FaTrashAlt />
+              </Button>
+            </Flex>
+          </Flex>
         </Flex>
       ))}
     </Flex>

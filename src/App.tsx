@@ -2,11 +2,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import AddNewContract from "./components/contracts/AddNewContract";
 import ContractList from "./components/contracts/ContractList";
+import AddNewForm from "./components/forms/AddNewForm";
 import FormList from "./components/forms/FormList";
 import Layout from "./components/Layout";
 import ContractsPage from "./routes/contracts";
 import FormsPage from "./routes/forms";
 import HomePage from "./routes/home";
+import QrCodesPages from "./routes/qrCodes";
 
 const App = () => (
   <Router>
@@ -19,6 +21,11 @@ const App = () => (
         </Route>
 
         <Route path="/forms" element={<FormsPage />}>
+          <Route path="" element={<FormList />} />
+          <Route path="new" element={<AddNewForm />} />
+        </Route>
+
+        <Route path="/qr-codes" element={<QrCodesPages />}>
           <Route path="" element={<FormList />} />
         </Route>
 
