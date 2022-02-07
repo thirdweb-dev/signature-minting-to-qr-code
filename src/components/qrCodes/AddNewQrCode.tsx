@@ -128,10 +128,6 @@ export default function AddNewQrCode() {
     toast,
   ]);
 
-  useEffect(() => {
-    console.log(formValues);
-  }, [formValues]);
-
   if (forms === undefined || contracts === undefined) {
     return <Spinner size={"sm"}></Spinner>;
   }
@@ -229,7 +225,7 @@ export default function AddNewQrCode() {
       )}
 
       {minterAddresses?.map((a) => (
-        <li>{a}</li>
+        <li key={a}>{a}</li>
       ))}
 
       {(selectedContract === undefined || selectedForm === undefined) && (

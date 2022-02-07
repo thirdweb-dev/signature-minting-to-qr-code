@@ -63,7 +63,8 @@ export default function CodeCard({ qrCode }: { qrCode: Code }) {
 
       <Flex flexDir={"row"}>
         <Box
-          maxW={"450"}
+          maxW={"300"}
+          width={"300"}
           onClick={() => window.open(claimLink, "_blank")}
           cursor={"pointer"}
         >
