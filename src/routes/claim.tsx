@@ -1,7 +1,6 @@
 import { useSwitchNetwork, useWeb3 } from "@3rdweb/hooks";
-import { useToast } from "@3rdweb/react/node_modules/@chakra-ui/toast";
-import { Text, Box, Flex, Heading, Button } from "@chakra-ui/react";
-import { useCallback, useEffect, useState } from "react";
+import { Box, Button, Flex, Heading, Text, useToast } from "@chakra-ui/react";
+import { useCallback, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import CodeCard from "../components/qrCodes/CodeCard";
 import useClaimStatus from "../hooks/useClaimStatus";
