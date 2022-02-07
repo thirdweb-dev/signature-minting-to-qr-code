@@ -27,6 +27,7 @@ const App = () => (
         <Route path="/forms" element={<FormsPage />}>
           <Route path="" element={<FormList />} />
           <Route path="new" element={<AddNewForm />} />
+          <Route path="edit" element={<AddNewForm />} />
         </Route>
 
         <Route path="/qr-codes" element={<QrCodesPages />}>

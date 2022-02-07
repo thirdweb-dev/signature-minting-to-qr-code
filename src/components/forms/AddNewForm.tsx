@@ -19,6 +19,8 @@ import { BsFillTrashFill } from "react-icons/bs";
 export default function AddNewForm() {
   const [searchParams] = useSearchParams();
 
+  const isEditingId = searchParams.get("id");
+
   const [fields, setFields] = useState<Field[]>(
     JSON.parse(searchParams.get("fields") || "[]")
   );
@@ -32,13 +34,34 @@ export default function AddNewForm() {
   const navigate = useNavigate();
 
   const save = useCallbackRef(async () => {
-    await formDb.forms.add({
-      fields: fields,
-      name: formName,
-      createdAtInSeconds: Math.floor(Date.now() / 1000),
-    });
+    if (fields.some((f) => f.label === "")) {
+      toast({
+        title: "Fields cannot be empty",
+        description: "Please fill in all fields",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+      return;
+    }
+
+    const uniqueFields = Array.from(new Set(fields.map((f) => f.label)));
+
+    if (isEditingId) {
+      await formDb.forms.update(parseInt(isEditingId, 10), {
+        fields: uniqueFields.map((f) => ({ label: f })),
+        name: formName,
+        createdAtInSeconds: Math.floor(Date.now() / 1000),
+      });
+    } else {
+      await formDb.forms.add({
+        fields: uniqueFields.map((f) => ({ label: f })),
+        name: formName,
+        createdAtInSeconds: Math.floor(Date.now() / 1000),
+      });
+    }
     navigate("/forms");
-  }, [fields, formName]);
+  }, [fields, formName, isEditingId]);
 
   useEffect(() => {
     const serializedFields = JSON.stringify(fields);
@@ -47,9 +70,11 @@ export default function AddNewForm() {
     window.history.replaceState(
       null,
       "Add New Contract",
-      `/forms/new/?name=${formName}&fields=${serializedFields}`
+      `/forms/new/?name=${formName}&fields=${serializedFields}${
+        isEditingId ? "&id=" + isEditingId : ""
+      }`
     );
-  }, [fields, formName]);
+  }, [fields, formName, isEditingId]);
 
   return (
     <Flex mt={2} flexDir={"column"}>
