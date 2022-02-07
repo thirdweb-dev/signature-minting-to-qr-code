@@ -81,7 +81,10 @@ export default function AddNewQrCode() {
     const mintEndTime = Math.floor(Date.now() / 1000) + 60 * 60 * 24;
     const { payload, signature } = await module.generateSignature({
       metadata: {
-        ...formValues,
+        properties: {
+          ...formValues,
+        },
+        name: selectedForm?.name,
       },
       price: 0,
       currencyAddress: ethers.constants.AddressZero,

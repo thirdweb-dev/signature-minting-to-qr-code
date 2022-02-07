@@ -10,7 +10,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { contractDb } from "../../databases/contracts";
 import useSdk from "../../hooks/useSdk";
 import { AllChains, SupportedChainIdToLabelMap } from "../../utils/network";
@@ -32,6 +32,7 @@ export default function AddNewContract() {
   const [saving, setSaving] = useState(false);
 
   const toast = useToast();
+  const navigate = useNavigate();
 
   const sdk = useSdk({
     chainId,
@@ -79,7 +80,8 @@ export default function AddNewContract() {
     });
 
     console.log("saved contract", result);
-  }, [address, label, chainId]);
+    navigate("/contracts");
+  }, [address, chainId, label, navigate]);
 
   return (
     <Flex mt={2} flexDir={"column"}>

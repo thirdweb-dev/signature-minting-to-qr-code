@@ -34,6 +34,7 @@ export const alchemyUrlMap: Record<SupportedChainId, string> = {
   [SupportedChainId.Rinkeby]: `https://rinkeby-light.eth.linkpool.io/`,
   [SupportedChainId.Fantom]: "https://rpc.ftm.tools/",
   [SupportedChainId.Avalanche]: "https://api.avax.network/",
-  [SupportedChainId.Polygon]: `https://polygon-rpc.com/`,
+  [SupportedChainId.Polygon]:
+    "https://polygon-mainnet.g.alchemy.com/v2/lsckH2xYSKeVX3Lkyxn5pFToiZT_5hQx",
   [SupportedChainId.Mumbai]: `https://rpc-mumbai.maticvigil.com`,
 };

@@ -17,7 +17,9 @@ export default function useSdk(options: {
 
   if (options.chainId) {
     const rpcUrl = alchemyUrlMap[options.chainId];
-    return new ThirdwebSDK(rpcUrl);
+    return new ThirdwebSDK(rpcUrl, {
+      readOnlyRpcUrl: rpcUrl,
+    });
   }
 
   return undefined;
