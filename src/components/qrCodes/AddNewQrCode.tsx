@@ -82,8 +82,8 @@ export default function AddNewQrCode() {
     const metadata = {
       properties: {
         ...formValues,
-        name: selectedForm?.name,
       },
+      name: selectedForm?.name,
     };
     const { payload, signature } = await module.generateSignature({
       metadata,
