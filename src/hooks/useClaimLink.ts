@@ -8,5 +8,5 @@ export default function useClaimLink(claim?: Code) {
   const str = JSON.stringify(claim);
   const base64 = Buffer.from(str).toString("base64");
 
-  return `${window.location.origin}/qr-codes/claim?sig=${base64}`;
+  return `${window.location.origin}/claim?sig=${base64}`;
 }

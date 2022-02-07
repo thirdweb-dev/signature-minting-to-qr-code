@@ -8,8 +8,8 @@ const Layout: React.FC = ({ children }) => {
   const toast = useToast();
 
   return (
-    <Flex flexDir={"column"} padding={6}>
-      <Flex flexDir={"row"} alignItems={"center"}>
+    <Flex flexDir={"column"} padding={6} maxW={"1200px"} margin="auto">
+      <Flex flexDir={"row"}>
         <Box flexGrow={1} mr={2} alignSelf={"flex-end"}>
           {/* <ConnectWallet disableNetworkSwitching={true}></ConnectWallet> */}
         </Box>

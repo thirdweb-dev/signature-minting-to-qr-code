@@ -78,9 +78,8 @@ export default function ClaimCode() {
         </>
       )}
 
-      <Text></Text>
       <Box>
-        <CodeCard qrCode={code} />
+        <CodeCard qrCode={code} showCopyLinkButton={false} />
       </Box>
     </Flex>
   );
